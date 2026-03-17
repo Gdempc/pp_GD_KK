@@ -67,6 +67,7 @@ namespace pp_GD_KK
         {
             Form3 okno3 = new Form3();
             okno3.Show();
+            //komentarz?
         }
     }
 }
