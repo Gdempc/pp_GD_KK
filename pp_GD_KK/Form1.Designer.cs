@@ -56,7 +56,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(1184, 761);
-            this.splitContainer1.SplitterDistance = 60;
+            this.splitContainer1.SplitterDistance = 58;
             this.splitContainer1.TabIndex = 1;
             // 
             // panel1
@@ -69,7 +69,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(8);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(1184, 60);
+            this.panel1.Size = new System.Drawing.Size(1184, 58);
             this.panel1.TabIndex = 2;
             // 
             // RegisterBtn
@@ -77,22 +77,22 @@
             this.RegisterBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.RegisterBtn.Location = new System.Drawing.Point(1033, 5);
             this.RegisterBtn.Name = "RegisterBtn";
-            this.RegisterBtn.Size = new System.Drawing.Size(75, 48);
+            this.RegisterBtn.Size = new System.Drawing.Size(75, 46);
             this.RegisterBtn.TabIndex = 1;
             this.RegisterBtn.Text = "Zarejestruj";
             this.RegisterBtn.UseVisualStyleBackColor = true;
-            this.RegisterBtn.Click += new System.EventHandler(this.RegisterBtn_Click);
+            this.RegisterBtn.MouseEnter += new System.EventHandler(this.RegisterBtn_MouseEnter);
             // 
             // LoginBtn
             // 
             this.LoginBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.LoginBtn.Location = new System.Drawing.Point(1108, 5);
             this.LoginBtn.Name = "LoginBtn";
-            this.LoginBtn.Size = new System.Drawing.Size(69, 48);
+            this.LoginBtn.Size = new System.Drawing.Size(69, 46);
             this.LoginBtn.TabIndex = 0;
             this.LoginBtn.Text = "Zaloguj";
             this.LoginBtn.UseVisualStyleBackColor = true;
-            this.LoginBtn.Click += new System.EventHandler(this.LoginBtn_Click);
+            this.LoginBtn.MouseEnter += new System.EventHandler(this.LoginBtn_MouseEnter);
             // 
             // flowLayoutPanel1
             // 
@@ -102,7 +102,7 @@
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1184, 697);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1184, 699);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // Form1
