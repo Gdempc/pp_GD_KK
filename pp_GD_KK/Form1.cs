@@ -16,8 +16,7 @@ namespace pp_GD_KK
         private Timer animationTimer;
         private Timer closeTimer;
 
-        private int animationStep = 20;
-
+        private int animationStep = 25;
         private int targetHeight1 = 90;
         private int targetHeight2 = 220;
 
@@ -28,6 +27,16 @@ namespace pp_GD_KK
         {
             InitializeComponent();
             SetupTimers();
+            InitializePopups();
+        }
+
+        private void InitializePopups()
+        {
+            popup1 = new UserControl1 { Height = 0, Visible = false };
+            popup2 = new UserControl2 { Height = 0, Visible = false };
+
+            this.Controls.Add(popup1);
+            this.Controls.Add(popup2);
         }
 
         private void SetupTimers()
@@ -41,14 +50,16 @@ namespace pp_GD_KK
 
         private void AnimationTimer_Tick(object sender, EventArgs e)
         {
-            HandlePopupAnimation(ref popup1, ref isClosing1, targetHeight1);
+            HandlePopupAnimation(popup1, ref isClosing1, targetHeight1);
+            HandlePopupAnimation(popup2, ref isClosing2, targetHeight2);
 
-            HandlePopupAnimation(ref popup2, ref isClosing2, targetHeight2);
+            bool p1Animating = isClosing1 ? popup1.Height > 0 : (popup1.Visible && popup1.Height < targetHeight1);
+            bool p2Animating = isClosing2 ? popup2.Height > 0 : (popup2.Visible && popup2.Height < targetHeight2);
 
-            if (popup1 == null && popup2 == null) animationTimer.Stop();
+            if (!p1Animating && !p2Animating) animationTimer.Stop();
         }
 
-        private void HandlePopupAnimation<T>(ref T popup, ref bool closingFlag, int currentTarget) where T : UserControl
+        private void HandlePopupAnimation(UserControl popup, ref bool closingFlag, int currentTarget)
         {
             if (popup == null) return;
 
@@ -56,6 +67,7 @@ namespace pp_GD_KK
             {
                 if (popup.Height < currentTarget)
                 {
+                    popup.Visible = true;
                     popup.Height += animationStep;
                     if (popup.Height >= currentTarget) popup.Height = currentTarget;
                 }
@@ -67,10 +79,8 @@ namespace pp_GD_KK
                     popup.Height -= animationStep;
                     if (popup.Height <= 0)
                     {
-                        this.Controls.Remove(popup);
-                        popup.Dispose();
-                        popup = null;
-                        closingFlag = false;
+                        popup.Height = 0;
+                        popup.Visible = false;
                     }
                 }
             }
@@ -80,25 +90,25 @@ namespace pp_GD_KK
         {
             Point mousePos = Cursor.Position;
 
-            if (popup1 != null && !isClosing1)
+            if (popup1.Visible && !isClosing1)
             {
                 if (!IsMouseOver(LoginBtn, mousePos) && !IsMouseOver(popup1, mousePos))
                 {
                     isClosing1 = true;
-                    if (!animationTimer.Enabled) animationTimer.Start();
+                    animationTimer.Start();
                 }
             }
 
-            if (popup2 != null && !isClosing2)
+            if (popup2.Visible && !isClosing2)
             {
                 if (!IsMouseOver(RegisterBtn, mousePos) && !IsMouseOver(popup2, mousePos))
                 {
                     isClosing2 = true;
-                    if (!animationTimer.Enabled) animationTimer.Start();
+                    animationTimer.Start();
                 }
             }
 
-            if (popup1 == null && popup2 == null) closeTimer.Stop();
+            if (!popup1.Visible && !popup2.Visible) closeTimer.Stop();
         }
 
         private bool IsMouseOver(Control ctrl, Point mousePos)
@@ -108,30 +118,18 @@ namespace pp_GD_KK
 
         private void LoginBtn_MouseEnter(object sender, EventArgs e)
         {
-            if (isClosing1) { isClosing1 = false; animationTimer.Start(); return; }
-            if (popup1 != null) return;
-
-            popup1 = new UserControl1 { Height = 0 };
-            PositionPopup(popup1, LoginBtn);
-            this.Controls.Add(popup1);
-            popup1.BringToFront();
-
             isClosing1 = false;
+            PositionPopup(popup1, LoginBtn);
+            popup1.BringToFront();
             animationTimer.Start();
             closeTimer.Start();
         }
 
         private void RegisterBtn_MouseEnter(object sender, EventArgs e)
         {
-            if (isClosing2) { isClosing2 = false; animationTimer.Start(); return; }
-            if (popup2 != null) return;
-
-            popup2 = new UserControl2 { Height = 0 };
-            PositionPopup(popup2, RegisterBtn);
-            this.Controls.Add(popup2);
-            popup2.BringToFront();
-
             isClosing2 = false;
+            PositionPopup(popup2, RegisterBtn);
+            popup2.BringToFront();
             animationTimer.Start();
             closeTimer.Start();
         }
@@ -150,7 +148,8 @@ namespace pp_GD_KK
                 p.Width = (strings.Count > 3) ? flowLayoutPanel1.Width - 30 : flowLayoutPanel1.Width - 20;
                 PictureBox pictureBox = new PictureBox { Height = p.Height - 10, Width = p.Height - 10, Image = Resources.latest, SizeMode = PictureBoxSizeMode.StretchImage, BackColor = Color.Red };
                 RichTextBox txt = new RichTextBox { Text = s, Width = p.Width - pictureBox.Width - 15, Height = p.Height - 10, Enabled = false, BorderStyle = BorderStyle.FixedSingle };
-                p.Controls.Add(pictureBox); p.Controls.Add(txt);
+                p.Controls.Add(pictureBox);
+                p.Controls.Add(txt);
                 flowLayoutPanel1.Controls.Add(p);
             }
         }
