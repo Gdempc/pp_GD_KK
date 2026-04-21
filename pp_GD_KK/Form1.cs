@@ -15,7 +15,7 @@ namespace pp_GD_KK
             InitializeComponent();
         }
 
-        
+        //komentarz pzdr
 
         private void Form1_Load(object sender, EventArgs e)
         {
