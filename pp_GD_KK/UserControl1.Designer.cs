@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.LoginBtn = new System.Windows.Forms.Button();
-            this.LoginAsGuestBtn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.LoginBtn = new NoFocusButton();
             this.SuspendLayout();
             // 
             // maskedTextBox1
@@ -44,24 +43,6 @@
             this.maskedTextBox1.PasswordChar = '*';
             this.maskedTextBox1.Size = new System.Drawing.Size(186, 20);
             this.maskedTextBox1.TabIndex = 8;
-            // 
-            // LoginBtn
-            // 
-            this.LoginBtn.Location = new System.Drawing.Point(155, 64);
-            this.LoginBtn.Name = "LoginBtn";
-            this.LoginBtn.Size = new System.Drawing.Size(77, 23);
-            this.LoginBtn.TabIndex = 11;
-            this.LoginBtn.Text = "Zaloguj";
-            this.LoginBtn.UseVisualStyleBackColor = true;
-            // 
-            // LoginAsGuestBtn
-            // 
-            this.LoginAsGuestBtn.Location = new System.Drawing.Point(37, 64);
-            this.LoginAsGuestBtn.Name = "LoginAsGuestBtn";
-            this.LoginAsGuestBtn.Size = new System.Drawing.Size(112, 23);
-            this.LoginAsGuestBtn.TabIndex = 10;
-            this.LoginAsGuestBtn.Text = "Kontynuuj jako gość";
-            this.LoginAsGuestBtn.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -99,21 +80,29 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Login:";
             // 
+            // LoginBtn
+            // 
+            this.LoginBtn.Location = new System.Drawing.Point(158, 64);
+            this.LoginBtn.Name = "LoginBtn";
+            this.LoginBtn.Size = new System.Drawing.Size(75, 23);
+            this.LoginBtn.TabIndex = 10;
+            this.LoginBtn.Text = "Zaloguj";
+            this.LoginBtn.UseVisualStyleBackColor = true;
+            this.LoginBtn.Click += new System.EventHandler(this.LoginBtn_Click);
+            // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.LoginBtn);
-            this.Controls.Add(this.LoginAsGuestBtn);
+            this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UserControl1";
             this.Size = new System.Drawing.Size(240, 90);
-            this.MouseLeave += new System.EventHandler(this.UserControl1_MouseLeave);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,11 +111,10 @@
         #endregion
 
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.Button LoginBtn;
-        private System.Windows.Forms.Button LoginAsGuestBtn;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private NoFocusButton LoginBtn;
     }
 }

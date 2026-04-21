@@ -27,6 +27,8 @@ namespace pp_GD_KK
                 UserControl4 infoBox = new UserControl4 {Dock=DockStyle.Fill };
                 splitContainer1.Panel2.Controls.Add(infoBox);
 
+
+
             }
         }
     

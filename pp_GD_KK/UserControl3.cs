@@ -27,16 +27,25 @@ namespace pp_GD_KK
         {
             InitializeComponent();
             SetupTimers();
+            this.Load += UserControl3_Load;
+        }
+        private void UserControl3_Load(object sender, EventArgs e)
+        {
             InitializePopups();
         }
-
         private void InitializePopups()
         {
             popup1 = new UserControl1 { Height = 0, Visible = false };
             popup2 = new UserControl2 { Height = 0, Visible = false };
 
-            this.Controls.Add(popup1);
-            this.Controls.Add(popup2);
+            var mainForm = this.FindForm();
+            if (mainForm != null)
+            {
+                mainForm.Controls.Add(popup1);
+                mainForm.Controls.Add(popup2);
+                popup1.BringToFront();
+                popup2.BringToFront();
+            }
         }
 
         private void SetupTimers()

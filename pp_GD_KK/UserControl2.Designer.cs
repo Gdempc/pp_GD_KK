@@ -30,7 +30,6 @@
         {
             this.label7 = new System.Windows.Forms.Label();
             this.PasswordTxt = new System.Windows.Forms.MaskedTextBox();
-            this.RegisterBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.MailTxt = new System.Windows.Forms.TextBox();
             this.SurnameTxt = new System.Windows.Forms.TextBox();
@@ -41,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.RegisterBtn = new NoFocusButton();
             this.SuspendLayout();
             // 
             // label7
@@ -60,15 +60,6 @@
             this.PasswordTxt.PasswordChar = '*';
             this.PasswordTxt.Size = new System.Drawing.Size(349, 20);
             this.PasswordTxt.TabIndex = 25;
-            // 
-            // RegisterBtn
-            // 
-            this.RegisterBtn.Location = new System.Drawing.Point(337, 185);
-            this.RegisterBtn.Name = "RegisterBtn";
-            this.RegisterBtn.Size = new System.Drawing.Size(75, 23);
-            this.RegisterBtn.TabIndex = 24;
-            this.RegisterBtn.Text = "Zarejestruj";
-            this.RegisterBtn.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -154,14 +145,23 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Login:";
             // 
+            // RegisterBtn
+            // 
+            this.RegisterBtn.Location = new System.Drawing.Point(337, 190);
+            this.RegisterBtn.Name = "RegisterBtn";
+            this.RegisterBtn.Size = new System.Drawing.Size(75, 23);
+            this.RegisterBtn.TabIndex = 27;
+            this.RegisterBtn.Text = "Zarejestruj";
+            this.RegisterBtn.UseVisualStyleBackColor = true;
+            // 
             // UserControl2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.RegisterBtn);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.PasswordTxt);
-            this.Controls.Add(this.RegisterBtn);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.MailTxt);
             this.Controls.Add(this.SurnameTxt);
@@ -183,7 +183,6 @@
 
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.MaskedTextBox PasswordTxt;
-        private System.Windows.Forms.Button RegisterBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox MailTxt;
         private System.Windows.Forms.TextBox SurnameTxt;
@@ -194,5 +193,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private NoFocusButton RegisterBtn;
     }
 }

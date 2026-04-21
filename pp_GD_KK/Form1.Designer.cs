@@ -41,7 +41,7 @@
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.splitContainer1.Size = new System.Drawing.Size(1184, 761);
-            this.splitContainer1.SplitterDistance = 58;
+            this.splitContainer1.SplitterDistance = 60;
             this.splitContainer1.TabIndex = 1;
             // 
             // Form1
