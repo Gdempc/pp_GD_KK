@@ -11,20 +11,20 @@ using System.Windows.Forms;
 
 namespace pp_GD_KK
 {
-    public partial class UserControl4 : UserControl
+    public partial class UserControl6 : UserControl
     {
-        List<string> strings = new List<string> { "ogłoszenie1", "ogłoszenie2", "ogłoszenie2"};
-        public UserControl4()
+        List<String> wydarzenia = new List<String> {"","",""};
+        public UserControl6()
         {
             InitializeComponent();
         }
 
-        private void UserControl4_Load(object sender, EventArgs e)
+        private void UserControl6_Load(object sender, EventArgs e)
         {
-            foreach (string s in strings)
+            foreach (string s in wydarzenia)
             {
                 FlowLayoutPanel p = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 180, BorderStyle = BorderStyle.FixedSingle };
-                p.Width = (strings.Count > 3) ? flowLayoutPanel1.Width - 30 : flowLayoutPanel1.Width - 20;
+                p.Width = (wydarzenia.Count > 3) ? flowLayoutPanel1.Width - 30 : flowLayoutPanel1.Width - 20;
                 PictureBox pictureBox = new PictureBox { Height = p.Height - 10, Width = p.Height - 10, Image = Resources.latest, SizeMode = PictureBoxSizeMode.StretchImage, BackColor = Color.Red };
                 RichTextBox txt = new RichTextBox { Text = s, Width = p.Width - pictureBox.Width - 15, Height = p.Height - 10, Enabled = false, BorderStyle = BorderStyle.FixedSingle };
                 p.Controls.Add(pictureBox);

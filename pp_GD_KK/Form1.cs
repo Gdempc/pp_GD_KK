@@ -24,8 +24,8 @@ namespace pp_GD_KK
                 UserControl3 menuL = new UserControl3 {Dock=DockStyle.Fill };
                 splitContainer1.Panel1.Controls.Add(menuL);
 
-                UserControl4 infoBox = new UserControl4 {Dock=DockStyle.Fill };
-                splitContainer1.Panel2.Controls.Add(infoBox);
+                UserControl4 newsBox = new UserControl4 {Dock=DockStyle.Fill };
+                splitContainer1.Panel2.Controls.Add(newsBox);
 
 
 
