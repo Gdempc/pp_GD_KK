@@ -200,11 +200,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\screens\Zrzut ekranu 2026-05-27 222840.jpg" />
     <None Include="Resources\Profil.png" />
     <None Include="Resources\Profil1.png" />
     <Content Include="Resources\latest.png" />
-    <Content Include="Resources\screens\Zrzut ekranu 2026-04-14 012758.jpg" />
-    <Content Include="Resources\screens\Zrzut ekranu 2026-04-14 012817.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,65 +1,164 @@
-﻿using pp_GD_KK.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace pp_GD_KK
 {
     public partial class UserControl6 : UserControl
     {
-
-
-        List<String> wydarzenia = new List<String> { "a", "b", "c" };
-        
-        private UserControl7 uc7Instance;
+        private readonly string connString = "Server=localhost;Database=wydarzeniastudenckie;Uid=root;Pwd=;";
 
         public UserControl6()
         {
             InitializeComponent();
-            uc7Instance = new UserControl7() { Dock = DockStyle.Fill, Name = "UserControl7" };
         }
 
-
-        
-
+        // Wywołujemy ładowanie wydarzeń przy wyświetleniu kontrolki
         private void UserControl6_Load(object sender, EventArgs e)
         {
-            foreach (string s in wydarzenia)
+            ZaladujWydarzenia();
+        }
+
+        private void ZaladujWydarzenia()
+        {
+            // Czyszczenie starych elementów z panelu przed przeładowaniem
+            flowLayoutPanel1.Controls.Clear();
+
+            string query = "SELECT id, Title, Description, Image, UserAmount FROM wydarzenia";
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
             {
-                FlowLayoutPanel p = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 180, BorderStyle = BorderStyle.FixedSingle };
-                p.Click += DynamicControl_Click;
-                p.Width = (wydarzenia.Count > 3) ? flowLayoutPanel1.Width - 30 : flowLayoutPanel1.Width - 20;
-                PictureBox pictureBox = new PictureBox { Height = p.Height - 10, Width = p.Height - 10, Image = Resources.latest, SizeMode = PictureBoxSizeMode.StretchImage, BackColor = Color.Red };
-                FlowLayoutPanel p2 = new FlowLayoutPanel { Height = p.Height-10, Width = p.Width - pictureBox.Width - 15, FlowDirection=FlowDirection.TopDown};
-                TextBox txtT = new TextBox { Text = s, Width = p2.Width - 10, Enabled = false, BorderStyle = BorderStyle.FixedSingle, TextAlign = HorizontalAlignment.Center};
-                RichTextBox txtO = new RichTextBox { Text = s, Width = p2.Width - 10, Height = p2.Height - 35, Enabled = false, BorderStyle = BorderStyle.FixedSingle };
-                p.Controls.Add(pictureBox);
-                p2.Controls.Add(txtT);
-                p2.Controls.Add(txtO);
-                p.Controls.Add(p2);
-                flowLayoutPanel1.Controls.Add(p);
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32("id");
+                                string title = reader.GetString("Title");
+                                string description = reader.GetString("Description");
+                                int userAmount = reader.GetInt32("UserAmount");
+
+                                Image image = null;
+                                if (!reader.IsDBNull(reader.GetOrdinal("Image")))
+                                {
+                                    byte[] imageBytes = (byte[])reader["Image"];
+                                    image = BytesToImage(imageBytes);
+                                }
+
+                                // Tworzenie wizualnego kafelka dla wydarzenia
+                                Panel eventCard = StworzKafelekWydarzenia(id, title, description, image, userAmount);
+                                
+                                // Dodanie kafelka do głównej listy
+                                flowLayoutPanel1.Controls.Add(eventCard);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Błąd ładowania wydarzeń: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
-        private void DynamicControl_Click(object sender, EventArgs e)
+        private FlowLayoutPanel StworzKafelekWydarzenia(int id, string tytul, string opis, Image zdjecie, int iloscOsob)
+
+
         {
-            Control kliknietyElement = sender as Control;
-            FlowLayoutPanel panel = (kliknietyElement is FlowLayoutPanel) ?
-                                     (FlowLayoutPanel)kliknietyElement :
-                                     (FlowLayoutPanel)kliknietyElement.Parent;
+            FlowLayoutPanel card = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                Size = new Size(flowLayoutPanel1.Width - 25, 180),
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.DarkBlue,
+            };
 
-            var parent = this.Parent;
+            PictureBox pb = new PictureBox
+            {
+                Size = new Size(180, 180),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Image = zdjecie ?? Properties.Resources.latest
+            };
 
-            parent.Controls.Remove(this);
-            parent.Controls.Add(uc7Instance);
+            FlowLayoutPanel card2 = new FlowLayoutPanel 
+            { 
+                Height = 170, 
+                Width = card.Width - pb.Width - 120, 
+                FlowDirection = FlowDirection.TopDown,
+                BackColor = Color.White,
+            };
+            Label lblTitle = new Label
+            {
+                Text = tytul,
+                Font = new Font("Arial", 12, FontStyle.Bold),
+                Location = new Point(180, 10),
+                Size = new Size(400, 20)
+            };
 
-            uc7Instance.BringToFront();
+            Label lblDesc = new Label
+            {
+                Text = opis,
+                Font = new Font("Arial", 9),
+                Location = new Point(180, 40),
+                Size = new Size(100, 130),
+                BackColor = Color.Teal
+            };
+
+            FlowLayoutPanel card3 = new FlowLayoutPanel
+            {
+                Height = 170,
+                Width = 80,
+                FlowDirection = FlowDirection.TopDown,
+                BackColor = Color.Gray,
+            };
+
+            Label lblAmount = new Label
+            {
+                Text = $"{iloscOsob}",
+                Font = new Font("Arial", 9, FontStyle.Italic),
+                Size = new Size(50, 60)
+            };
+
+            Button btnJoin = new Button
+            {
+                Text = "Dołącz",
+                Size = new Size(50, 80),
+                Tag = id
+            };
+            
+            btnJoin.Click += BtnJoin_Click;
+
+            card2.Controls.Add(lblTitle);
+            card2.Controls.Add(lblDesc);
+            card3.Controls.Add(lblAmount);
+            card3.Controls.Add(btnJoin);
+            card.Controls.Add(pb);
+            card.Controls.Add(card2);
+            card.Controls.Add(card3);
+
+            return card;
+        }
+
+        private void BtnJoin_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int wydarzenieId = (int)btn.Tag;
+
+            MessageBox.Show($"Kliknięto dołącz do wydarzenia o ID: {wydarzenieId}");
+        }
+
+        private Image BytesToImage(byte[] imageBytes)
+        {
+            using (MemoryStream ms = new MemoryStream(imageBytes))
+            {
+                return Image.FromStream(ms);
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace pp_GD_KK
 {
     public partial class UserControl3 : UserControl
     {
+
         private UserControl1 popup1;
         private UserControl2 popup2;
         private Timer animationTimer;

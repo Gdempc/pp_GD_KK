@@ -6,13 +6,14 @@ namespace pp_GD_KK
 {
     public partial class UserControl1 : UserControl
     {
-        private readonly string connString = "Server=localhost;Database=moja_baza;Uid=root;Pwd=;";
+        private readonly string connString = "Server=localhost;Database=wydarzeniastudenckie;Uid=root;Pwd=;";
 
 
         public UserControl1()
         {
             InitializeComponent();
         }
+
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
@@ -46,6 +47,11 @@ namespace pp_GD_KK
                                 string name = reader.GetString("Name");
                                 string surname = reader.GetString("Surname");
                                 bool isAdmin = reader.GetBoolean("Admin");
+
+                                GlobalnePanele.PanelMenu.Controls.Clear();
+
+                                UserControl5 noweMenu = new UserControl5 { Dock = DockStyle.Fill };
+                                GlobalnePanele.PanelMenu.Controls.Add(noweMenu);
 
                                 WyczyscPola();
 

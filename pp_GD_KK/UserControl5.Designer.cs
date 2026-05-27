@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.eventBtn = new NoFocusButton();
+            this.newsBtn = new NoFocusButton();
             this.circularPictureBox1 = new CircularPictureBox();
-            this.noFocusButton1 = new NoFocusButton();
-            this.noFocusButton2 = new NoFocusButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.circularPictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -39,8 +39,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.noFocusButton2);
-            this.panel1.Controls.Add(this.noFocusButton1);
+            this.panel1.Controls.Add(this.eventBtn);
+            this.panel1.Controls.Add(this.newsBtn);
             this.panel1.Controls.Add(this.circularPictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -48,6 +48,29 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 1, 2, 0);
             this.panel1.Size = new System.Drawing.Size(1186, 58);
             this.panel1.TabIndex = 1;
+            // 
+            // eventBtn
+            // 
+            this.eventBtn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.eventBtn.Location = new System.Drawing.Point(562, 1);
+            this.eventBtn.Name = "eventBtn";
+            this.eventBtn.Size = new System.Drawing.Size(562, 55);
+            this.eventBtn.TabIndex = 3;
+            this.eventBtn.Text = "Wydarzenia";
+            this.eventBtn.UseVisualStyleBackColor = true;
+            this.eventBtn.Click += new System.EventHandler(this.eventBtn_Click);
+            // 
+            // newsBtn
+            // 
+            this.newsBtn.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.newsBtn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.newsBtn.Location = new System.Drawing.Point(0, 1);
+            this.newsBtn.Name = "newsBtn";
+            this.newsBtn.Size = new System.Drawing.Size(562, 55);
+            this.newsBtn.TabIndex = 2;
+            this.newsBtn.Text = "Ogłoszenia";
+            this.newsBtn.UseVisualStyleBackColor = false;
+            this.newsBtn.Click += new System.EventHandler(this.newsBtn_Click);
             // 
             // circularPictureBox1
             // 
@@ -61,29 +84,6 @@
             this.circularPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.circularPictureBox1.TabIndex = 1;
             this.circularPictureBox1.TabStop = false;
-            // 
-            // noFocusButton1
-            // 
-            this.noFocusButton1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.noFocusButton1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.noFocusButton1.Location = new System.Drawing.Point(0, 1);
-            this.noFocusButton1.Name = "noFocusButton1";
-            this.noFocusButton1.Size = new System.Drawing.Size(562, 55);
-            this.noFocusButton1.TabIndex = 2;
-            this.noFocusButton1.Text = "Ogłoszenia";
-            this.noFocusButton1.UseVisualStyleBackColor = false;
-            this.noFocusButton1.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // noFocusButton2
-            // 
-            this.noFocusButton2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.noFocusButton2.Location = new System.Drawing.Point(562, 1);
-            this.noFocusButton2.Name = "noFocusButton2";
-            this.noFocusButton2.Size = new System.Drawing.Size(562, 55);
-            this.noFocusButton2.TabIndex = 3;
-            this.noFocusButton2.Text = "Wydarzenia";
-            this.noFocusButton2.UseVisualStyleBackColor = true;
-            this.noFocusButton2.Click += new System.EventHandler(this.btn_Click);
             // 
             // UserControl5
             // 
@@ -102,7 +102,7 @@
         #endregion
         private System.Windows.Forms.Panel panel1;
         private CircularPictureBox circularPictureBox1;
-        private NoFocusButton noFocusButton2;
-        private NoFocusButton noFocusButton1;
+        private NoFocusButton eventBtn;
+        private NoFocusButton newsBtn;
     }
 }
