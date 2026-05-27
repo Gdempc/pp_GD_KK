@@ -31,12 +31,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.PasswordTxt = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.MailTxt = new System.Windows.Forms.TextBox();
             this.SurnameTxt = new System.Windows.Forms.TextBox();
             this.NameTxt = new System.Windows.Forms.TextBox();
             this.LoginTxt = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,7 +44,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 147);
+            this.label7.Location = new System.Drawing.Point(3, 118);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(406, 13);
             this.label7.TabIndex = 26;
@@ -55,7 +53,7 @@
             // 
             // PasswordTxt
             // 
-            this.PasswordTxt.Location = new System.Drawing.Point(63, 113);
+            this.PasswordTxt.Location = new System.Drawing.Point(63, 86);
             this.PasswordTxt.Name = "PasswordTxt";
             this.PasswordTxt.PasswordChar = '*';
             this.PasswordTxt.Size = new System.Drawing.Size(349, 20);
@@ -65,19 +63,12 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(3, 190);
+            this.label6.Location = new System.Drawing.Point(3, 141);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(128, 13);
             this.label6.TabIndex = 23;
             this.label6.Text = "Błąd dotyczący rejestracji";
             this.label6.Visible = false;
-            // 
-            // MailTxt
-            // 
-            this.MailTxt.Location = new System.Drawing.Point(63, 87);
-            this.MailTxt.Name = "MailTxt";
-            this.MailTxt.Size = new System.Drawing.Size(349, 20);
-            this.MailTxt.TabIndex = 22;
             // 
             // SurnameTxt
             // 
@@ -103,20 +94,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 117);
+            this.label5.Location = new System.Drawing.Point(3, 89);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 13);
             this.label5.TabIndex = 18;
             this.label5.Text = "Hasło:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 90);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "E-mail:";
             // 
             // label3
             // 
@@ -147,12 +129,13 @@
             // 
             // RegisterBtn
             // 
-            this.RegisterBtn.Location = new System.Drawing.Point(337, 190);
+            this.RegisterBtn.Location = new System.Drawing.Point(337, 141);
             this.RegisterBtn.Name = "RegisterBtn";
             this.RegisterBtn.Size = new System.Drawing.Size(75, 23);
             this.RegisterBtn.TabIndex = 27;
             this.RegisterBtn.Text = "Zarejestruj";
             this.RegisterBtn.UseVisualStyleBackColor = true;
+            this.RegisterBtn.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // UserControl2
             // 
@@ -163,17 +146,15 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.PasswordTxt);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.MailTxt);
             this.Controls.Add(this.SurnameTxt);
             this.Controls.Add(this.NameTxt);
             this.Controls.Add(this.LoginTxt);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UserControl2";
-            this.Size = new System.Drawing.Size(418, 218);
+            this.Size = new System.Drawing.Size(418, 170);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,12 +165,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.MaskedTextBox PasswordTxt;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox MailTxt;
         private System.Windows.Forms.TextBox SurnameTxt;
         private System.Windows.Forms.TextBox NameTxt;
         private System.Windows.Forms.TextBox LoginTxt;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

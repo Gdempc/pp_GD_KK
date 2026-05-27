@@ -34,7 +34,6 @@ namespace pp_GD_KK
 
             string connectionString = $"Server={server};Database={database};Uid={uid};Pwd={password};";
             string query = "SELECT ID, Title, Description, Image FROM ogloszenia";
-            string query2 = "INSERT INTO ogloszenia (Title, Description, Image) VALUES (@Title, @Description, @Image)";
 
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))

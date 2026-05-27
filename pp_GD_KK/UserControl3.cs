@@ -18,8 +18,8 @@ namespace pp_GD_KK
         private Timer closeTimer;
 
         private int animationStep = 25;
-        private int targetHeight1 = 90;
-        private int targetHeight2 = 220;
+        private int targetHeight1 = 92;
+        private int targetHeight2 = 170;
 
         private bool isClosing1 = false;
         private bool isClosing2 = false;
