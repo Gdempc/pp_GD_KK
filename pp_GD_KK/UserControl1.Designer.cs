@@ -28,28 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.PasswdTxt = new System.Windows.Forms.MaskedTextBox();
+            this.LoginTxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.LoginBtn = new NoFocusButton();
             this.SuspendLayout();
             // 
-            // maskedTextBox1
+            // PasswdTxt
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(46, 25);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.PasswordChar = '*';
-            this.maskedTextBox1.Size = new System.Drawing.Size(186, 20);
-            this.maskedTextBox1.TabIndex = 8;
+            this.PasswdTxt.Location = new System.Drawing.Point(46, 25);
+            this.PasswdTxt.Name = "PasswdTxt";
+            this.PasswdTxt.PasswordChar = '*';
+            this.PasswdTxt.Size = new System.Drawing.Size(186, 20);
+            this.PasswdTxt.TabIndex = 8;
             // 
-            // textBox1
+            // LoginTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(46, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 20);
-            this.textBox1.TabIndex = 6;
+            this.LoginTxt.Location = new System.Drawing.Point(46, 3);
+            this.LoginTxt.Name = "LoginTxt";
+            this.LoginTxt.Size = new System.Drawing.Size(186, 20);
+            this.LoginTxt.TabIndex = 6;
             // 
             // label3
             // 
@@ -96,8 +96,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.LoginBtn);
-            this.Controls.Add(this.maskedTextBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.PasswdTxt);
+            this.Controls.Add(this.LoginTxt);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -110,8 +110,8 @@
 
         #endregion
 
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.MaskedTextBox PasswdTxt;
+        private System.Windows.Forms.TextBox LoginTxt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

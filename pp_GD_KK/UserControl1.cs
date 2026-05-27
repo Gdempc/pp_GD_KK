@@ -1,54 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace pp_GD_KK
 {
     public partial class UserControl1 : UserControl
     {
-        String login = "123";
-        String passwd = "123";
+        private readonly string connString = "Server=localhost;Database=moja_baza;Uid=root;Pwd=;";
+
+
         public UserControl1()
         {
             InitializeComponent();
         }
 
-
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == login && maskedTextBox1.Text == passwd) 
+            label3.Visible = false;
+            string login = LoginTxt.Text.Trim();
+            string password = PasswdTxt.Text;
+
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
             {
-                Form mainForm = this.FindForm();
+                label3.Text = "Wprowadź login i hasło!";
+                label3.Visible = true;
+                return;
+            }
 
-                if (mainForm != null)
+            string query = "SELECT Name, Surname, Admin FROM uzytkownicy WHERE Login = @Login AND Passwd = @Passwd";
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    Control old = mainForm.Controls.Find("userControl3", true).FirstOrDefault();
+                    command.Parameters.AddWithValue("@Login", login);
+                    command.Parameters.AddWithValue("@Passwd", password);
 
-
-                    if (old != null)
+                    try
                     {
-                        Point position = old.Location;
-                        var parent = old.Parent;
+                        connection.Open();
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string name = reader.GetString("Name");
+                                string surname = reader.GetString("Surname");
+                                bool isAdmin = reader.GetBoolean("Admin");
 
-                        parent.Controls.Remove(old);
+                                WyczyscPola();
 
-                        UserControl5 menuPL = new UserControl5();
-                        parent.Controls.Add(menuPL);
-                        menuPL.BringToFront();
-                        this.Parent.Controls.Remove(this);
-                        this.Dispose();
+                            }
+                            else
+                            {
+                                label3.Text = "Niepoprawny login lub hasło.";
+                                label3.Visible= true;
+                            }
+                        }
                     }
-                        
-                            
-                            
+                    catch (Exception ex)
+                    {
+                        label3.Text = "Błąd bazy danych przy logowaniu: " + ex.Message;
+                        label3.Visible = true;
+                    }
                 }
             }
         }
+
+        private void WyczyscPola()
+        {
+            LoginTxt.Clear();
+            PasswdTxt.Clear();
+        }
     }
+
+ 
 }
