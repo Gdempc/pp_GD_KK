@@ -24,48 +24,7 @@ namespace pp_GD_KK
 
         private void btn_Click(object sender, EventArgs e)
         {
-            Form mainForm = this.FindForm();
-            if (mainForm == null) return;
 
-            noFocusButton1.BackColor = SystemColors.Control;
-            noFocusButton2.BackColor = SystemColors.Control;
-
-            NoFocusButton clicked = (NoFocusButton)sender;
-            clicked.BackColor = SystemColors.ActiveBorder;
-
-            if (clicked.Text == "Ogłoszenia")
-            {
-                Control old = mainForm.Controls.Find("UserControl6", true).FirstOrDefault();
-
-                if (old != null)
-                {
-                    var parent = old.Parent;
-                    parent.Controls.Remove(old);
-
-                    if (!parent.Controls.Contains(uc4Instance))
-                    {
-                        parent.Controls.Add(uc4Instance);
-                        uc4Instance.BringToFront();
-                    }
-                }
-            }
-
-            if (clicked.Text == "Wydarzenia")
-            {
-                Control old = mainForm.Controls.Find("UserControl4", true).FirstOrDefault();
-
-                if (old != null)
-                {
-                    var parent = old.Parent;
-                    parent.Controls.Remove(old);
-
-                    if (!parent.Controls.Contains(uc6Instance))
-                    {
-                        parent.Controls.Add(uc6Instance);
-                        uc6Instance.BringToFront();
-                    }
-                }
-            }
         }
     }
 }

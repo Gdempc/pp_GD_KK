@@ -54,28 +54,9 @@ namespace pp_GD_KK
                                      (FlowLayoutPanel)kliknietyElement :
                                      (FlowLayoutPanel)kliknietyElement.Parent;
 
-            string title = "";
-            string desc = "";
-            Image picture = null;
-            foreach (Control c in panel.Controls)
-            {
-                if (c is TextBox tb)
-                {
-                    title = tb.Text;
-                }
-                if (c is RichTextBox rtb)
-                {
-                    desc = rtb.Text;
-                }
-                if (c is PictureBox pb)
-                {
-                    picture = pb.Image;
-                }
-            }
             var parent = this.Parent;
 
             parent.Controls.Remove(this);
-            uc7Instance.SetData(title, desc, picture);
             parent.Controls.Add(uc7Instance);
 
             uc7Instance.BringToFront();

@@ -17,11 +17,10 @@ namespace pp_GD_KK
             InitializeComponent();
         }
 
-        public void SetData(string title, string desc, Image picture)
+        public void SetData(string title, string desc)
         {
             textBox1.Text = title;
             richTextBox2.Text = desc;
-            pictureBox1.Image = picture;
         }
     }
 }
