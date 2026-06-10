@@ -51,18 +51,19 @@
             // 
             // eventBtn
             // 
+            this.eventBtn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.eventBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.eventBtn.Location = new System.Drawing.Point(562, 1);
             this.eventBtn.Name = "eventBtn";
             this.eventBtn.Size = new System.Drawing.Size(562, 55);
             this.eventBtn.TabIndex = 3;
             this.eventBtn.Text = "Wydarzenia";
-            this.eventBtn.UseVisualStyleBackColor = true;
+            this.eventBtn.UseVisualStyleBackColor = false;
             this.eventBtn.Click += new System.EventHandler(this.eventBtn_Click);
             // 
             // newsBtn
             // 
-            this.newsBtn.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.newsBtn.BackColor = System.Drawing.Color.Silver;
             this.newsBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.newsBtn.Location = new System.Drawing.Point(0, 1);
             this.newsBtn.Name = "newsBtn";
@@ -77,11 +78,10 @@
             this.circularPictureBox1.BorderColor = System.Drawing.Color.Transparent;
             this.circularPictureBox1.BorderSize = 0F;
             this.circularPictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.circularPictureBox1.Image = global::pp_GD_KK.Properties.Resources.Profil1;
             this.circularPictureBox1.Location = new System.Drawing.Point(1127, 1);
             this.circularPictureBox1.Name = "circularPictureBox1";
             this.circularPictureBox1.Size = new System.Drawing.Size(55, 55);
-            this.circularPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.circularPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.circularPictureBox1.TabIndex = 1;
             this.circularPictureBox1.TabStop = false;
             // 
@@ -92,8 +92,8 @@
             this.Controls.Add(this.panel1);
             this.Name = "UserControl5";
             this.Size = new System.Drawing.Size(1186, 58);
+            this.Load += new System.EventHandler(this.UserControl5_Load);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.circularPictureBox1)).EndInit();
             this.ResumeLayout(false);
 

@@ -28,7 +28,7 @@ namespace pp_GD_KK
                 return;
             }
 
-            string query = "SELECT Name, Surname, Admin FROM uzytkownicy WHERE Login = @Login AND Passwd = @Passwd";
+            string query = "SELECT ID FROM uzytkownicy WHERE Login = @Login AND Passwd = @Passwd";
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
@@ -44,9 +44,9 @@ namespace pp_GD_KK
                         {
                             if (reader.Read())
                             {
-                                string name = reader.GetString("Name");
-                                string surname = reader.GetString("Surname");
-                                bool isAdmin = reader.GetBoolean("Admin");
+                                int id = reader.GetInt32("ID");
+
+                                Globals.ID = id;
 
                                 GlobalnePanele.PanelMenu.Controls.Clear();
 

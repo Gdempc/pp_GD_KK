@@ -1,23 +1,15 @@
 ﻿using pp_GD_KK.Properties;
 using System;
 using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-
 
 namespace pp_GD_KK
 {
     public partial class UserControl4 : UserControl
     {
-
-        
+        private readonly string connectionString = "Server=localhost;Database=wydarzeniastudenckie;Uid=root;Pwd=;";
 
         public UserControl4()
         {
@@ -26,51 +18,104 @@ namespace pp_GD_KK
 
         private void UserControl4_Load(object sender, EventArgs e)
         {
+            ZaladujOgloszenia();
+        }
 
-            string server = "localhost";
-            string database = "wydarzeniastudenckie"; 
-            string uid = "root";         
-            string password = "";        
+        private void ZaladujOgloszenia()
+        {
+            flowLayoutPanel1.Controls.Clear();
 
-            string connectionString = $"Server={server};Database={database};Uid={uid};Pwd={password};";
-            string query = "SELECT ID, Title, Description, Image FROM ogloszenia";
-
+            string query = "SELECT ID, Title, Description, Image FROM ogloszenia ORDER BY ID DESC";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                
-
-                try
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    connection.Open();
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    MySqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
+                    try
                     {
-                        string title = reader.GetString("Title");
-                        string description = reader.GetString("Description");
-
-                        Image image = null;
-                        if (!reader.IsDBNull(reader.GetOrdinal("Image")))
+                        connection.Open();
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            byte[] imageBytes = (byte[])reader["Image"];
-                            image = Image.FromStream(new MemoryStream(imageBytes));
+                            while (reader.Read())
+                            {
+                                string title = reader.IsDBNull(reader.GetOrdinal("Title")) ? "Bez tytułu" : reader.GetString("Title");
+                                string description = reader.IsDBNull(reader.GetOrdinal("Description")) ? "Brak treści..." : reader.GetString("Description");
+
+                                Image image = null;
+                                if (!reader.IsDBNull(reader.GetOrdinal("Image")))
+                                {
+                                    try
+                                    {
+                                        byte[] imageBytes = (byte[])reader["Image"];
+                                        using (MemoryStream ms = new MemoryStream(imageBytes))
+                                        {
+                                            image = Image.FromStream(ms);
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        image = null;
+                                    }
+                                }
+
+                                Panel card = new Panel
+                                {
+                                    Width = flowLayoutPanel1.Width - 25,
+                                    Height = 160,
+                                    BorderStyle = BorderStyle.FixedSingle,
+                                    BackColor = Color.White,
+                                    Margin = new Padding(0, 0, 0, 15)
+                                };
+
+                                PictureBox pictureBox = new PictureBox
+                                {
+                                    Dock = DockStyle.Left,
+                                    Width = 160,
+                                    Image = image ?? Properties.Resources.latest,
+                                    SizeMode = PictureBoxSizeMode.Zoom,
+                                    BackColor = Color.FromArgb(250, 250, 250),
+                                    Padding = new Padding(5)
+                                };
+
+                                Panel textPanel = new Panel
+                                {
+                                    Dock = DockStyle.Fill,
+                                    Padding = new Padding(15, 10, 15, 10)
+                                };
+
+                                Label lblTitle = new Label
+                                {
+                                    Text = title,
+                                    Font = new Font("Segoe UI", 12f, FontStyle.Bold),
+                                    ForeColor = Color.FromArgb(33, 37, 41),
+                                    Dock = DockStyle.Top,
+                                    Height = 28,
+                                    AutoSize = false
+                                };
+
+                                Label lblDesc = new Label
+                                {
+                                    Text = description,
+                                    Font = new Font("Segoe UI", 9.5f, FontStyle.Regular),
+                                    ForeColor = Color.FromArgb(108, 117, 125),
+                                    Dock = DockStyle.Fill,
+                                    AutoSize = false
+                                };
+
+                                textPanel.Controls.Add(lblDesc);
+                                textPanel.Controls.Add(lblTitle);
+
+                                card.Controls.Add(textPanel);
+                                card.Controls.Add(pictureBox);
+
+                                flowLayoutPanel1.Controls.Add(card);
+                            }
                         }
-
-                        FlowLayoutPanel p = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 180, BorderStyle = BorderStyle.FixedSingle };
-                        p.Width = flowLayoutPanel1.Width - 30;
-                        PictureBox pictureBox = new PictureBox { Height = p.Height - 10, Width = p.Height - 10, Image = image, SizeMode = PictureBoxSizeMode.StretchImage, BackColor = Color.White };
-                        RichTextBox txt = new RichTextBox { Text = description, Width = p.Width - pictureBox.Width - 15, Height = p.Height - 10, Enabled = false, BorderStyle = BorderStyle.FixedSingle };
-                        p.Controls.Add(pictureBox);
-                        p.Controls.Add(txt);
-                        flowLayoutPanel1.Controls.Add(p);
-
                     }
-                }
-                catch (MySqlException ex)
-                {
-                    Console.WriteLine("Błąd połączenia: " + ex.Message);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Błąd pobierania ogłoszeń: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

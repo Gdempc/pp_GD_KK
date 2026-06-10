@@ -34,4 +34,9 @@ namespace pp_GD_KK
         public static System.Windows.Forms.SplitterPanel PanelTresc { get; set; }
     }
 
+    public static class Globals
+    {
+        public static int ID { get; set; }
+    }
+
 }

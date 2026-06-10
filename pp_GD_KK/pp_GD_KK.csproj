@@ -151,6 +151,18 @@
     <Compile Include="UserControl7.Designer.cs">
       <DependentUpon>UserControl7.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControl8.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl8.Designer.cs">
+      <DependentUpon>UserControl8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl9.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl9.Designer.cs">
+      <DependentUpon>UserControl9.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +196,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl7.resx">
       <DependentUpon>UserControl7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl8.resx">
+      <DependentUpon>UserControl8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl9.resx">
+      <DependentUpon>UserControl9.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

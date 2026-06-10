@@ -1,5 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
+using pp_GD_KK.Properties;
 using System;
+using System.Drawing;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -33,11 +36,12 @@ namespace pp_GD_KK
             string surname = SurnameTxt.Text.Trim();
             bool isAdmin = false;
 
+            byte[] imageBytes = ImageToBytes(Resources.Profil);
+
             MatchCollection matches = Regex.Matches(password, @"[^a-zA-Z0-9]");
 
             if (password.Length < 8 || matches.Count < 2)
             {
-
                 label6.Text = "Błędne hasło";
                 label6.Visible = true;
                 return;
@@ -50,8 +54,8 @@ namespace pp_GD_KK
                 return;
             }
 
-            string query = "INSERT INTO uzytkownicy (Login, Passwd, Name, Surname, Admin) " +
-                           "VALUES (@Login, @Passwd, @Name, @Surname, @Admin)";
+            string query = "INSERT INTO uzytkownicy (Login, Passwd, Name, Surname, Admin, Image) " +
+                           "VALUES (@Login, @Passwd, @Name, @Surname, @Admin, @Image)";
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
@@ -62,6 +66,7 @@ namespace pp_GD_KK
                     command.Parameters.AddWithValue("@Name", name);
                     command.Parameters.AddWithValue("@Surname", surname);
                     command.Parameters.AddWithValue("@Admin", isAdmin);
+                    command.Parameters.AddWithValue("@Image", imageBytes); 
 
                     try
                     {
@@ -78,8 +83,19 @@ namespace pp_GD_KK
                     {
                         label6.Text = "Błąd bazy danych podczas rejestracji: " + ex.Message;
                         label6.Visible = true;
+                        Console.Write(ex.Message);
                     }
                 }
+            }
+        }
+
+        private byte[] ImageToBytes(Image img)
+        {
+            if (img == null) return null;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
             }
         }
 
